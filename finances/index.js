@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const dbUrl = 'mongodb://0.0.0.0:27017/fiapFinance';
+const dbUrl = 'mongodb://mongo:27017/fiapFinance';
 
 mongoose.connect(dbUrl, {
   useNewurlParser: true,

@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const User = require("./models/user");
 const auth = require('./middleware/auth');
 const userExist = require('./middleware/userExist');
@@ -10,9 +10,10 @@ const createToken = require("./utils/token");
 const PORT = 8081;
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-const dbUrl = 'mongodb://0.0.0.0:27017/fiapUsers';
+const dbUrl = 'mongodb://mongo:27017/fiapUsers';
 
 
 mongoose.connect(dbUrl, {
@@ -74,14 +75,12 @@ app.post('/users/changepassword',async  (request, response) => {
 
 app.post('/login', (request, response) => {
   const { username, password } = request.body;
-
   User.findOne({ username }, async  (error, data) => {
     if (error) return response.status(400).send({ message: "Find user error" });
     if (!data) return response.status(404).send({ message: "User not found" });
     const isMatch = await bcrypt.compare(password, data.password);
-    console.log(isMatch)
+
     if (isMatch) {
-      console.log(data)
       const token = createToken(data._id, data.username);
       return response.status(200).send({ message: `Authenticated`, token })
     }
