@@ -22,13 +22,21 @@ app.get("/finances", auth, async (_, response) => {
   response.json({ data: finances });
 });
 
-app.post('/finances', auth, financeExist, async (request, response) => {
+app.post('/finances', auth, financeExist, (request, response) => {
   const finance = new Finance(request.body);
   finance.save().then(data =>
     (response.status(201).json({ message: 'Finance created successfully', data }))
   ).catch(error =>
     (response.status(400).json({ message: `${error}` }))
   );
+});
+
+app.put('/finances/:id', auth, async (request, response) => {
+  Finance.findByIdAndUpdate(request.params.id, request.body, { new: true, runValidators: true }, (error, data) => {
+    if (data === null) return response.status(404).send({ error: 'Finance not found' });
+    if (error) return response.status(400).json({ message: `${error}` });
+    return response.status(200).json({ message: 'Finance updated successfully', data })
+  });
 });
 
 app.listen(PORT, () => (`Server started 🚀 http://localhost:${PORT}`));

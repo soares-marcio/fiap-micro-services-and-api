@@ -76,15 +76,15 @@ app.post('/users/changepassword',async  (request, response) => {
 app.post('/login', (request, response) => {
   const { username, password } = request.body;
   User.findOne({ username }, async  (error, data) => {
-    if (error) return response.status(400).send({ message: "Find user error" });
-    if (!data) return response.status(404).send({ message: "User not found" });
+    if (error) return response.status(400).json({ message: "Find user error" });
+    if (!data) return response.status(404).json({ message: "User not found" });
     const isMatch = await bcrypt.compare(password, data.password);
 
     if (isMatch) {
       const token = createToken(data._id, data.username);
-      return response.status(200).send({ message: `Authenticated`, token })
+      return response.status(200).json({ message: `Authenticated`, token })
     }
-    return response.status(400).send({ message: "User/Password invalid" });
+    return response.status(400).json({ message: "User/Password invalid" });
   })
 });
 

@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "1e4fa3f6-42f3-4b6a-9fa7-6653ef1ffbeb",
+		"name": "FIAP - Projeto Final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20353765"
+	},
+	"item": [
+		{
+			"name": "Finances",
+			"item": [
+				{
+					"name": "Get /Finances",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const username = pm.variables.get('username');",
+									"const password = pm.variables.get('password');",
+									"",
+									"eval(environment.preRequestFunction)().request.loginAccount(username, password);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessFiapToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{financesUrl}}/finances",
+							"host": [
+								"{{financesUrl}}"
+							],
+							"path": [
+								"finances"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post /Finances",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const username = pm.variables.get('username');",
+									"const password = pm.variables.get('password');",
+									"",
+									"eval(environment.preRequestFunction)().request.loginAccount(username, password);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessFiapToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Joao\",\n\t\"accountType\": \"CONTA_CORRENTE\",\n\t\"bankName\": \"ITAU\",\n\t\"cardLimit\": 12989.99\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{financesUrl}}/finances",
+							"host": [
+								"{{financesUrl}}"
+							],
+							"path": [
+								"finances"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put /Finances",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const username = pm.variables.get('username');",
+									"const password = pm.variables.get('password');",
+									"",
+									"eval(environment.preRequestFunction)().request.loginAccount(username, password);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessFiapToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Joao\",\n\t\"accountType\": \"POUPANÇA\",\n\t\"bankName\": \"ITAU\",\n\t\"cardLimit\": 121189.99\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{financesUrl}}/finances/62b5189f3d4210f8c7302cf1",
+							"host": [
+								"{{financesUrl}}"
+							],
+							"path": [
+								"finances",
+								"62b5189f3d4210f8c7302cf1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GET /Users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const username = pm.variables.get('username');",
+									"const password = pm.variables.get('password');",
+									"",
+									"eval(environment.preRequestFunction)().request.loginAccount(username, password);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessFiapToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{usersUrl}}/users",
+							"host": [
+								"{{usersUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /Users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"Dillon\",\n\t\"password\": \"Teste@2022\",\n\t\"email\": \"Dillon@me.com\",\n\t\"name\": \"Dillon\",\n\t\"phone\": \"(41) 3567-9999\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{usersUrl}}/users",
+							"host": [
+								"{{usersUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ChangePassword",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const username = pm.variables.get('username');",
+									"const password = pm.variables.get('password');",
+									"",
+									"eval(environment.preRequestFunction)().request.loginAccount(username, password);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessFiapToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"Dillon\",\n\t\"currentPassword\": \"Teste@2022\",\n\t\"newPassword\": \"Teste@2021\",\n\t\"confirmPassword\": \"Teste@2021\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{usersUrl}}/users/changepassword",
+							"host": [
+								"{{usersUrl}}"
+							],
+							"path": [
+								"users",
+								"changepassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"postman.setEnvironmentVariable(\"preRequestFunction\", () => {",
+					"    const loginAccount = (username, password) => {",
+					"        var request = {",
+					"            \"url\": pm.variables.get('usersUrl') + '/login',",
+					"            \"method\": 'POST',",
+					"            \"header\": {",
+					"                'Content-Type': 'text/plain',",
+					"            },",
+					"            \"body\": {",
+					"                mode: 'urlencoded',",
+					"                urlencoded: [",
+					"                    { key: \"username\", value: `${username}` },",
+					"                    { key: \"password\", value: `${password}` }",
+					"                ]",
+					"            }",
+					"        }",
+					"        pm.sendRequest(request, (err, res) => {",
+					"            var data = res.json();",
+					"            pm.expect(data).property('token')",
+					"            pm.test('Get access_token', () => pm.variables.set(\"accessFiapToken\", data.token))",
+					"        })",
+					"    }",
+					"    return {",
+					"        request: {",
+					"            loginAccount",
+					"        }",
+					"    }",
+					"",
+					"});",
+					"",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "usersUrl",
+			"value": "http://localhost:8081"
+		},
+		{
+			"key": "financesUrl",
+			"value": "http://localhost:8082"
+		},
+		{
+			"key": "username",
+			"value": "Dillon",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "Teste@2021",
+			"type": "string"
+		},
+		{
+			"key": "preRequestFunction",
+			"value": "() => {    const loginAccount = (username, password) => {        var request = {            \"url\": pm.variables.get('usersUrl') + '/login',            \"method\": 'POST',            \"header\": {                'Content-Type': 'text/plain',            },            \"body\": {                mode: 'urlencoded',                urlencoded: [                    { key: \"username\", value: `${username}` },                    { key: \"password\", value: `${password}` }                ]            }        }        pm.sendRequest(request, (err, res) => {            var data = res.json();            pm.expect(data).property('token')            pm.test('Get access_token', () => pm.variables.set(\"accessFiapToken\", data.token))        })    }    return {        request: {            loginAccount        }    }}",
+			"type": "string"
+		}
+	]
+}
